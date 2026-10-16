@@ -28,7 +28,7 @@ function windowOnLoad(data) {
         fixedColumns: {
             start: 1,
         },
-        scrollY: '73vh',
+        scrollY: 'calc(100vh - 11rem)',
         scrollX: true,
         pageLength: 50,
         columnControl: [['orderAsc', 'orderDesc', 'orderRemove', 'searchDropdown']],
