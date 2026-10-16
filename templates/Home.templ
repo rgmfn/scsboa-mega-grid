@@ -1,0 +1,13 @@
+package templates
+
+templ Home() {
+	@HtmlMain() {
+		<div>
+			<label for="yearFilter">Year:</label>
+			<select id="yearFilter">
+				<option value="">All years</option>
+			</select>
+		</div>
+		<table id="recaps-table" class="display nowrap cell-border"></table>
+	}
+}
