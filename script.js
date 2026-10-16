@@ -1,10 +1,27 @@
 function windowOnLoad(data) {
-    const DATE_COL = 3; // 3rd column, 0-indexed
+    const DATE_COL = 2; // 2nd column, 0-indexed
 
     function getYear(text) {
         const match = /\d{2}\/\d{2}\/(\d{2})/.exec(text);
         return match ? '20' + match[1] : null; // TODO: fix for 2100 season
     }
+
+    const yearSelect = document.getElementById('yearFilter');
+    const populateYears = (table) => {
+        const previous = yearSelect.value;
+        const years = [
+            ...new Set(
+                table.column(DATE_COL).data().toArray().map(getYear).filter(Boolean),
+            ),
+        ]
+            .sort()
+            .reverse();
+        console.log(table.column(DATE_COL).data().toArray(), years);
+
+        yearSelect.length = 1; // keep only all years option
+        years.forEach((y) => yearSelect.add(new Option(y, y)));
+        yearSelect.value = years.includes(previous) ? previous : '';
+    };
 
     const table = new DataTable('#recaps-table', {
         data: data,
@@ -21,8 +38,8 @@ function windowOnLoad(data) {
                 searchable: true,
             },
             { title: 'Division', searchable: true },
-            { title: 'Comp', searchable: true },
             { title: 'Date', searchable: true },
+            { title: 'Comp', searchable: true },
             { title: 'MP 1 STT' },
             { title: 'MP 1 MUS' },
             { title: 'MP 1 Tot', className: 'light-gray' },
@@ -57,23 +74,6 @@ function windowOnLoad(data) {
             populateYears(this.api());
         },
     });
-
-    const yearSelect = document.getElementById('yearFilter');
-
-    const populateYears = (table) => {
-        const previous = yearSelect.value;
-        const years = [
-            ...new Set(
-                table.column(DATE_COL).data().toArray().map(getYear).filter(Boolean),
-            ),
-        ]
-            .sort()
-            .reverse();
-
-        yearSelect.length = 1; // keep only all years option
-        years.forEach((y) => yearSelect.add(new Option(y, y)));
-        yearSelect.value = years.includes(previous) ? previous : '';
-    };
 
     // Filter table based on year selection
     DataTable.ext.search.push(function(_settings, rowData) {
