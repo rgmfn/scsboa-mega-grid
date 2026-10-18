@@ -23,16 +23,21 @@
     <script src="script.js"></script>
     <script src="scsboa_data.js"></script>
     <script>
-        window.onload = () => windowOnLoad(data);
+      window.onload = () => windowOnLoad(data);
     </script>
   </head>
   <body>
-    <div>
-      <label for="yearFiler">Year:</label>
-      <select id="yearFilter">
-        <option value="">All years</option>
-      </select>
-      <table id="recaps-table" class="display nowrap cell-border"></table>
+    <div
+      style="display: flex; flex-direction: row; justify-content: space-between"
+    >
+      <div>
+        <label for="yearFiler">Year:</label>
+        <select id="yearFilter">
+          <option value="">All years</option>
+        </select>
+      </div>
+      <div>Last updated: 10/10/26</div>
     </div>
+    <table id="recaps-table" class="display nowrap cell-border"></table>
   </body>
 </html>
