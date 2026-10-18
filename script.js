@@ -16,7 +16,6 @@ function windowOnLoad(data) {
         ]
             .sort()
             .reverse();
-        console.log(table.column(DATE_COL).data().toArray(), years);
 
         yearSelect.length = 1; // keep only all years option
         years.forEach((y) => yearSelect.add(new Option(y, y)));
